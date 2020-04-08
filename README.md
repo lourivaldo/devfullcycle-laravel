@@ -10,6 +10,6 @@
 * Desafio Docker 
     * Parte 1 (Nginx template)
         * [Código Fonte](https://github.com/lourivaldo/devfullcycle-laravel)
-    * Parte 2 (Linguagem Go!)
+    * Parte 2-3 (Linguagem Go!)
         * [Código Fonte](https://github.com/lourivaldo/devfullcycle-hello-golang)
         * Docker Hub [lourivaldo/codeeducation](https://hub.docker.com/r/lourivaldo/codeeducation)
