@@ -4,7 +4,12 @@ services:
   app:
     build: .
     container_name: devfullcycle_app
-    entrypoint: dockerize -wait tcp://db:3306 -timeout 40s ./.docker/entrypoint.sh
+    entrypoint: dockerize -template ./.docker/app/.env:.env -wait tcp://db:3306 -timeout 40s ./.docker/app/entrypoint.sh
+    environment:
+      - DB_HOST=db
+      - DB_DATABASE=laravel
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
     restart: always
     volumes:
       - .:/var/www
