@@ -5,5 +5,5 @@ steps:
     args: ["-f", "docker-compose.cloudbuild.yaml", "up", "-d"]
 
   - id: "Run docker ps"
-    name: "gcr.io/$PROJECT_ID/docker"
+    name: "gcr.io/cloud-builders/docker"
     args: ["ps"]
