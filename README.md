@@ -15,5 +15,5 @@
         * Docker Hub [lourivaldo/codeeducation](https://hub.docker.com/r/lourivaldo/codeeducation)
 
 * Processo de CI
-    * Parte 1 (pipeline de integração contínua com Google Cloud Build)
+    * Parte 1 (Pipeline de integração contínua com Google Cloud Build)
     * Parte 2 (Executar processo de CI no Google Cloud Build via GitHub pull request)
