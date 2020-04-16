@@ -1,5 +1,9 @@
 
 steps:
   - id: "Run docker-compose"
-    name: "gcr.io/$PROJECT_ID/docker-compose"
+    name: "gcr.io/$PROJECT_ID/docker-compose:1.25.5"
     args: ["-f", "docker-compose.cloudbuild.yaml", "up", "-d"]
+
+  - id: "Run docker ps"
+    name: "gcr.io/$PROJECT_ID/docker"
+    args: ["ps"]
