@@ -13,3 +13,7 @@
     * Parte 2-3 (Linguagem Go!)
         * [Código Fonte](https://github.com/lourivaldo/devfullcycle-hello-golang)
         * Docker Hub [lourivaldo/codeeducation](https://hub.docker.com/r/lourivaldo/codeeducation)
+
+* Processo de CI
+    * Parte 1 (pipeline de integração contínua com Google Cloud Build)
+    * Parte 2 (Google Cloud Build deverá iniciar o processo de CI via GitHub pull request)
