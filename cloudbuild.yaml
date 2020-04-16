@@ -9,5 +9,5 @@ steps:
     args: ["ps"]
 
   - id: "Run php composer"
-      name: "gcr.io/cloud-builders/docker"
-      args: ["exec", "-t", "app", "composer", "install"]
+    name: "gcr.io/cloud-builders/docker"
+    args: ["exec", "-t", "app", "composer", "install"]
