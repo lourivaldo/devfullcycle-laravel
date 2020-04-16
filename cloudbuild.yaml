@@ -10,12 +10,20 @@ steps:
 
   - id: "Run php composer"
     name: "gcr.io/cloud-builders/docker"
-    args: ["exec", "-t", "app", "composer", "install"]
+    args: ["exec", "-t", "devfullcycle_app", "composer", "install"]
 
   - id: "Copy .env"
     name: "gcr.io/cloud-builders/docker"
-    args: ["exec", "-t", "app", "cp", ".env.example", ".env"]
+    args: ["exec", "-t", "devfullcycle_app", "cp", ".env.example", ".env"]
 
   - id: "Run artisan key:generate"
     name: "gcr.io/cloud-builders/docker"
-    args: ["exec", "-t", "app", "php", "/var/www/artisan", "key:generate"]
+    args: ["exec", "-t", "devfullcycle_app", "php", "/var/www/artisan", "key:generate"]
+
+  - id: "Run migrations"
+    name: "gcr.io/cloud-builders/docker"
+    args: ["exec", "-t", "devfullcycle_app", "php", "/var/www/artisan", "migrate"]
+
+  - id: "Run phpunit"
+    name: "gcr.io/cloud-builders/docker"
+    args: ["exec", "-t", "devfullcycle_app", "php", "/var/www/vendor/bin/phpunit", "-c", "/var/www/phpunit.xml"]
