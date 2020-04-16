@@ -16,4 +16,4 @@
 
 * Processo de CI
     * Parte 1 (pipeline de integração contínua com Google Cloud Build)
-    * Parte 2 (Google Cloud Build deverá iniciar o processo de CI via GitHub pull request)
+    * Parte 2 (Executar processo de CI no Google Cloud Build via GitHub pull request)
