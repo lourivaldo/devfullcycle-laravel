@@ -2,7 +2,7 @@ name: "git-branch-behind-main"
 on:
   pull_request:
     branches:
-      - master
+      - develop
 jobs:
   git:
     name: Git master
