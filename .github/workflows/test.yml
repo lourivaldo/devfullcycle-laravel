@@ -1,8 +1,4 @@
 name: "git-branch-behind-main"
-description: "Check whether the current branch is behind main"
-branding:
-  icon: git-branch
-  color: orange
 on:
   pull_request:
     branches:
@@ -19,23 +15,32 @@ jobs:
       - name: Check
         shell: bash
         run: |
-          git-log-flat-colored() {
-            git --no-pager log --format="%C(yellow)%h%Creset %C(cyan)%cd%Creset %s %Cgreen%an%Creset" --date=short "$@"
-          }
+          #!/usr/bin/env sh
 
-          CURRENT_FEATURE=$(git symbolic-ref --short -q HEAD)
-          CURRENT_PATH=$(git rev-parse --show-toplevel)
-          REFERENCE_BRANCH="origin/master"
+          set -e
 
-          echo -e "\033[0;34m >>-----当前核查仓库路径${CURRENT_PATH}-----<< \033[0m"
-          git fetch origin master
+          if [ -n "$CI" ]; then
+          SRC_ORIGIN="origin/"
 
-          NB_COMMITS_BEHIND=$(git rev-list --left-right --count ${REFERENCE_BRANCH}...@ | cut -f1)
-
-          if [ "${NB_COMMITS_BEHIND}" -gt "0" ]; then
-            echo -e "\033[0;31m >>-----${CURRENT_FEATURE}-----<< 当前分支有 ${NB_COMMITS_BEHIND} 个提交落后于 \"${REFERENCE_BRANCH}\", 请合并最新的 master 分支代码\n \033[0m"
-            git-log-flat-colored ${REFERENCE_BRANCH} | head -"${NB_COMMITS_BEHIND}"
-            exit 2
-          else
-            echo -e "\033[0;32m >>-----${CURRENT_FEATURE}-----<<当前分支包含 ${REFERENCE_BRANCH} 分支上的所有提交记录 \033[0m"
+          if [ -z "$GITHUB_BASE_REF" ]; then
+          git remote set-branches origin '*'
+          git fetch origin develop
           fi
+          else
+          SRC_ORIGIN=""
+          fi
+
+          DST_BRANCH=${GITHUB_BASE_REF:-"develop"}
+          SRC_BRANCH=${GITHUB_HEAD_REF:-$(git branch --show-current)}
+
+          if ! git merge-base --is-ancestor origin/${DST_BRANCH} ${SRC_ORIGIN}${SRC_BRANCH}; then
+          echo "Not possible to fast-forward. Please, rebase the branch."
+          exit 1;
+          fi
+
+          if [ $(git log --oneline --merges origin/${DST_BRANCH}..${SRC_ORIGIN}${SRC_BRANCH} | wc -l) -ne 0 ]; then
+          echo "The source branch cannot contain merges. Please, rebase the branch."
+          exit 1;
+          fi
+
+          yarn commitlint --from=origin/${DST_BRANCH}
