@@ -17,3 +17,4 @@ RUN rm -rf /var/www/html
 
 EXPOSE 9000
 ENTRYPOINT ["php-fpm"]
+
