@@ -1,8 +1,4 @@
 name: "git-branch-behind-main"
-description: "Check whether the current branch is behind main"
-branding:
-  icon: git-branch
-  color: orange
 on:
   pull_request:
     branches:
