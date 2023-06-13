@@ -18,4 +18,3 @@
     * Parte 1 (Pipeline de integração contínua com Google Cloud Build)
     * Parte 2 (Executar processo de CI no Google Cloud Build via GitHub Pull request)
 
-a
