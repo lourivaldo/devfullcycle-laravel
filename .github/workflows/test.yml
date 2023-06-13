@@ -43,4 +43,3 @@ jobs:
           exit 1;
           fi
 
-          yarn commitlint --from=origin/${DST_BRANCH}
